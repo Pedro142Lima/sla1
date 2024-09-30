@@ -8,7 +8,7 @@ import axios from 'axios'
 export default function Consultar() {
     const [listaNegra, setListaNegra] = useState([]);
     const [placa, setPlaca] = useState('')
-    const [id, setId] = useState('')
+    const [id, setid] = useState('')
 
 
     async function buscar() {
@@ -26,21 +26,23 @@ export default function Consultar() {
         setListaNegra(resp.data);
     }
 
-    async function deletar(id) {
-        setId
-         const url = `http://localhost:5001/deletar/${id}`
-            let apagar = await axios.delete(url);
-            setListaNegra(apagar)
-    
-           
-    
+    async function deletar() {
+
+        const url = `http://localhost:5001/deletar/${id}`;
+        let resp = await axios.delete(url);
 
     }
 
+    const apagar = (index) => {
+        let apagar = listaNegra.filter((_, i) => i !== index)
+        setListaNegra(apagar)
 
+    }
 
-    
-   
+   function duas(){
+    deletar()
+    apagar()
+   }
 
     
 
@@ -75,7 +77,7 @@ export default function Consultar() {
                             <td>{item.marca}</td>
                             <td>{item.cor}</td>
                             <td>{item.placa}</td>
-                            <button onClick={deletar(item.id)}>deletar</button>
+                            <button onClick={duas}>deletar</button>
                         </tr>
                     )}
                 </tbody>
